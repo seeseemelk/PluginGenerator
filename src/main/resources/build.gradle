@@ -37,7 +37,7 @@ task deploy(dependsOn: 'jar') {
 	doLast {
 		project.copy() {
 		from 'build/libs/%pluginName%.jar'
-		into rootProject.projectDir + '/server/plugins/'
+		into './server/plugins/'
 		}
 	}
 }
