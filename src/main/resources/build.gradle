@@ -8,7 +8,6 @@ repositories {
 	jcenter()
 	
 	maven { url 'https://hub.spigotmc.org/nexus/content/repositories/public/' }
-	maven { url 'http://repo.md-5.net/content/groups/public/' }
 	maven { url 'https://jitpack.io' }
 }
 
@@ -17,7 +16,6 @@ configurations.all {
 }
 
 dependencies {
-	implementation 'org.bukkit:bukkit:1.12.2-R0.1-SNAPSHOT'
 	implementation 'org.spigotmc:spigot-api:1.12.2-R0.1-SNAPSHOT'
 
 	testImplementation 'junit:junit:4.12'
