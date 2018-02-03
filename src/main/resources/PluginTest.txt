@@ -1,4 +1,4 @@
-
+package %pluginPackage%;
 
 import static org.junit.Assert.*;
 
@@ -7,17 +7,20 @@ import org.junit.Before;
 import org.junit.Test;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
+import be.seeseemelk.mockbukkit.ServerMock;
 
-public class %pluginName%PluginTest
+public class %pluginName%Test
 {
+	@SuppressWarnings("unused")
 	private ServerMock server;
-	private %pluginName%Plugin plugin;
+	@SuppressWarnings("unused")
+	private %pluginName% plugin;
 
 	@Before
 	public void setUp() throws Exception
 	{
 		server = MockBukkit.mock();
-		plugin = MockBukkit.load(%pluginName%Plugin.class);
+		plugin = MockBukkit.load(%pluginName%.class);
 	}
 	
 	@After

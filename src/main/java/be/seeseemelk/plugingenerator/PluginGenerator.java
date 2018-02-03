@@ -46,7 +46,7 @@ public class PluginGenerator
 		copyFile("plugin.yml", directory+"src/main/resources/plugin.yml");
 		copyFile("Plugin.txt", directory+"src/main/java/"+packageDirectory+"/"+options.getPluginName()+".java");
 		if (options.useMockBukkit())
-			copyFile("PluginTest.txt", directory+"src/test/java/"+packageDirectory+"/"+options.getPluginName()+".java");
+			copyFile("PluginTest.txt", directory+"src/test/java/"+packageDirectory+"/"+options.getPluginName()+"Test.java");
 		copyFile("gradle-wrapper.properties", directory+"gradle/wrapper/gradle-wrapper.properties");
 		copyBinaryFile("gradle-wrapper.jar", directory+"gradle/wrapper/gradle-wrapper.jar");
 		
