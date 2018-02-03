@@ -1,0 +1,10 @@
+# Ignore hiddens files
+.*
+!.gitignore
+
+# Ignore binary directories
+bin/
+build/
+
+# Ignore jar files in the root 
+/*.jar

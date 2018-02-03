@@ -1,0 +1,13 @@
+apply plugin: 'java-library'
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+	implementation 'com.google.guava:guava:24.0-jre'
+	implementation 'org.apache.commons:commons-lang3:3.7'
+
+    //testImplementation 'junit:junit:4.12'
+}
+

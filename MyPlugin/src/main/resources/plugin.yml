@@ -1,0 +1,3 @@
+name: MyPlugin
+main: be.seeseemelk.MyPlugin
+version: 0.1.0

@@ -1,0 +1,35 @@
+
+
+import static org.junit.Assert.*;
+
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+
+import be.seeseemelk.mockbukkit.MockBukkit;
+
+public class %pluginName%PluginTest
+{
+	private ServerMock server;
+	private %pluginName%Plugin plugin;
+
+	@Before
+	public void setUp() throws Exception
+	{
+		server = MockBukkit.mock();
+		plugin = MockBukkit.load(%pluginName%Plugin.class);
+	}
+	
+	@After
+	public void tearDown()
+	{
+		MockBukkit.unload();
+	}
+
+	@Test
+	public void test()
+	{
+		fail("Not implemented");
+	}
+
+}
