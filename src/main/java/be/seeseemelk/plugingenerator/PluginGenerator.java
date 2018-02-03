@@ -34,7 +34,7 @@ public class PluginGenerator
 			conversionMappings.put("useMockBukkit", "//");
 	}
 	
-	public void generate() throws InterruptedException, IOException
+	public void generate() throws IOException
 	{
 		String directory = options.getPluginName() + "/";
 		String packageDirectory = options.getPackageName().replace('.', '/');
@@ -47,8 +47,8 @@ public class PluginGenerator
 		copyFile("Plugin.txt", directory+"src/main/java/"+packageDirectory+"/"+options.getPluginName()+".java");
 		if (options.useMockBukkit())
 			copyFile("PluginTest.txt", directory+"src/test/java/"+packageDirectory+"/"+options.getPluginName()+".java");
+		copyFile("gradle-wrapper.properties", directory+"gradle/wrapper/gradle-wrapper.properties");
 		copyBinaryFile("gradle-wrapper.jar", directory+"gradle/wrapper/gradle-wrapper.jar");
-		copyBinaryFile("gradle-wrapper.properties", directory+"gradle/wrapper/gradle-wrapper.properties");
 		
 		gradleFile.setExecutable(true);
 		File dir = gradleFile.getParentFile();
@@ -58,13 +58,23 @@ public class PluginGenerator
 			runCommand(dir, "./gradlew", "eclipse");
 	}
 	
-	private void runCommand(File dir, String... args) throws IOException, InterruptedException
+	private void runCommand(File dir, String... args) throws IOException
 	{
 		ProcessBuilder builder = new ProcessBuilder(args);
 		builder.directory(dir);
 		builder.inheritIO();
 		Process process = builder.start();
-		process.waitFor();
+		while (process.isAlive())
+		{
+			try
+			{
+				process.waitFor();
+			}
+			catch (InterruptedException e)
+			{
+				// Do nothing
+			}
+		}
 	}
 	
 	private File copyFile(String input, String output)
@@ -72,7 +82,7 @@ public class PluginGenerator
 		URL inputURL = ClassLoader.getSystemResource(input);
 		if (inputURL != null)
 		{
-			return copyFile(inputURL, new File(output));
+			return copyFile(inputURL, input, new File(output));
 		}
 		else
 		{
@@ -86,7 +96,7 @@ public class PluginGenerator
 		URL inputURL = ClassLoader.getSystemResource(input);
 		if (inputURL != null)
 		{
-			return copyBinaryFile(inputURL, new File(output));
+			return copyBinaryFile(inputURL, input, new File(output));
 		}
 		else
 		{
@@ -95,7 +105,7 @@ public class PluginGenerator
 		}
 	}
 	
-	private File copyFile(URL input, File output)
+	private File copyFile(URL input, String inputName, File output)
 	{
 		output = output.getAbsoluteFile();
 		File outputFolder = output.getParentFile();
@@ -105,7 +115,7 @@ public class PluginGenerator
 			outputFolder.mkdirs();
 		}
 		
-		System.out.println("COPY " + input.getPath() + " TO " + output.getAbsolutePath());
+		System.out.println("COPY " + inputName + " TO " + output.getAbsolutePath());
 		
 		try (BufferedReader inputReader = new BufferedReader(new InputStreamReader(input.openStream()));
 		     BufferedWriter outputWriter = new BufferedWriter(new FileWriter(output));)
@@ -125,6 +135,7 @@ public class PluginGenerator
 				outputWriter.write(iterator.next());
 				outputWriter.write("\n");
 			}
+			outputWriter.flush();
 		}
 		catch (IOException e)
 		{
@@ -134,7 +145,7 @@ public class PluginGenerator
 		return output;
 	}
 	
-	private File copyBinaryFile(URL input, File output)
+	private File copyBinaryFile(URL input, String inputName, File output)
 	{
 		output = output.getAbsoluteFile();
 		File outputFolder = output.getParentFile();
@@ -144,7 +155,7 @@ public class PluginGenerator
 			outputFolder.mkdirs();
 		}
 		
-		System.out.println("COPY BIN " + input.getPath() + " TO " + output.getAbsolutePath());
+		System.out.println("COPY BIN " + inputName + " TO " + output.getAbsolutePath());
 		
 		try (BufferedInputStream inputStream = new BufferedInputStream(input.openStream());
 		     BufferedOutputStream outputStream = new BufferedOutputStream(new FileOutputStream(output));)
@@ -156,6 +167,7 @@ public class PluginGenerator
 				outputStream.write(b, 0, read);
 				read = inputStream.read(b);
 			}
+			outputStream.flush();
 		}
 		catch (IOException e)
 		{
@@ -165,7 +177,7 @@ public class PluginGenerator
 		return output;
 	}
 
-	public static void main(String[] args) throws InterruptedException, IOException
+	public static void main(String[] args) throws IOException
 	{
 		Options options = new Options();
 		options.ask();
