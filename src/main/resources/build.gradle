@@ -36,8 +36,8 @@ task wrapper(type: Wrapper) {
 task deploy(dependsOn: 'jar') {
 	doLast {
 		project.copy() {
-		from 'build/libs/%pluginName%.jar'
-		into './server/plugins/'
+			from 'build/libs/%pluginName%.jar'
+			into new File(gradle.deployDir, 'plugins/')
 		}
 	}
 }
