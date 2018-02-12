@@ -1,3 +1,8 @@
+plugins {
+	id 'com.github.johnrengelman.shadow' version '2.0.2'
+	id 'java'
+}
+
 apply plugin: 'application'
 apply plugin: 'eclipse'
 
@@ -23,4 +28,3 @@ jar {
 task wrapper(type: Wrapper) {
 	gradleVersion = '4.5'
 }
-
