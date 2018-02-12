@@ -39,6 +39,7 @@ public final class Converters
 			case "no":
 			case "f":
 			case "false":
+				return false;
 			default:
 				throw new ConversionException("Not a valid answer");
 		}
