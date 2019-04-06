@@ -13,10 +13,10 @@ public class Options
 	{
 		Scanner scanner = new Scanner(System.in);
 		
-		System.out.print("What is the name of the plugin? ");
+		System.out.print("What is the name of the plugin (e.g.: MyPlugin)? ");
 		pluginName = ask(scanner, Converters::asNonEmptyString, Validators::isSimpleString);
 		
-		System.out.print("What is the package of the plugin? ");
+		System.out.print("What is the package of the plugin (e.g.: com.github.usename.myplugin)? ");
 		packageName = ask(scanner, Converters::asNonEmptyString, Validators::isGoodPackage);
 		
 		System.out.print("Should the plugin use MockBukkit for testing? (Y/N) ");

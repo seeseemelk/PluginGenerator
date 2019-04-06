@@ -50,7 +50,8 @@ public class PluginGenerator
 		copyFile("gradle-wrapper.properties", directory+"gradle/wrapper/gradle-wrapper.properties");
 		copyBinaryFile("gradle-wrapper.jar", directory+"gradle/wrapper/gradle-wrapper.jar");
 		
-		gradleFile.setExecutable(true);
+		if (!gradleFile.setExecutable(true))
+			System.err.println("Failed to make the gradlew file executable");
 		File dir = gradleFile.getParentFile();
 		if (SystemUtils.IS_OS_WINDOWS)
 			runCommand(dir, "gradlew.bat", "eclipse");

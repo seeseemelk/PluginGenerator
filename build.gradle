@@ -1,5 +1,6 @@
 apply plugin: 'application'
 apply plugin: 'eclipse'
+apply plugin: 'idea'
 
 mainClassName = "be.seeseemelk.plugingenerator.PluginGenerator"
 
@@ -18,9 +19,5 @@ jar {
 			'Main-Class': mainClassName
 		)
 	}
-}
-
-task wrapper(type: Wrapper) {
-	gradleVersion = '4.5'
 }
 

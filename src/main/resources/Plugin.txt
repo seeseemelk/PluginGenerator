@@ -19,12 +19,6 @@ public class %pluginName% extends JavaPlugin
 	}
 	
 	@Override
-	public void onLoad()
-	{
-		// TODO Stub
-	}
-	
-	@Override
 	public void onEnable()
 	{
 		// TODO Stub
