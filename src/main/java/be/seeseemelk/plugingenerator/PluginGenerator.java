@@ -48,7 +48,7 @@ public class PluginGenerator
 		if (options.useMockBukkit())
 			copyFile("PluginTest.txt", directory+"src/test/java/"+packageDirectory+"/"+options.getPluginName()+"Test.java");
 		copyFile("gradle-wrapper.properties", directory+"gradle/wrapper/gradle-wrapper.properties");
-		copyBinaryFile("gradle-wrapper.jar", directory+"gradle/wrapper/gradle-wrapper.jar");
+		copyBinaryFile("gradle-wrapper.jar.bin", directory+"gradle/wrapper/gradle-wrapper.jar");
 		
 		if (!gradleFile.setExecutable(true))
 			System.err.println("Failed to make the gradlew file executable");
