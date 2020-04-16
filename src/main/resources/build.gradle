@@ -16,10 +16,10 @@ configurations.all {
 }
 
 dependencies {
-	implementation 'org.spigotmc:spigot-api:1.13.2-R0.1-SNAPSHOT'
+	implementation 'org.spigotmc:spigot-api:1.15.2-R0.1-SNAPSHOT'
 
 	testImplementation 'junit:junit:4.12'
-	%useMockBukkit%testImplementation 'com.github.seeseemelk:MockBukkit-v1.13-spigot:0.1.1'
+	%useMockBukkit%testImplementation 'com.github.seeseemelk:MockBukkit-v1.15-spigot:0.2.1'
 }
 
 jar.doLast() {
